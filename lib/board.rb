@@ -86,13 +86,17 @@ class Board
   end
   #Checks diagonal for matching markers
   def check_diagonal
-    top = self.board[:top][0][0]
-    middle = self.board[:middle][0][0]
-    bottom = self.board[:bottom][0][0]
-    diagonal = [top, middle, bottom]
-    if diagonal.all? {|char| char == diagonal.first}
-      return diagonal.first
-    else 
+    top = [self.board[:top][0], self.board[:top][2]]
+    middle = self.board[:middle][1]
+    bottom = [self.board[:bottom][0], self.board[:bottom][2]]
+    diagonal_one = [top[0], middle, bottom[1]]
+    diagonal_two = [top[1], middle, bottom[0]]
+    p diagonal_one
+    if diagonal_one.all? {|char| char == diagonal_one.first}
+      return diagonal_one.first
+    elsif diagonal_two.all? {|char| char == diagonal_two.first} 
+      return diagonal_two.first
+    else
       return false#No diagonal win
     end
   end
