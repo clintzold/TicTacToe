@@ -6,7 +6,7 @@ class Board
 
   #Gives access to read and change game-board hash table
   attr_accessor :board
-
+  #Initialize new boards
   def initialize
     @board = {  :top => ['%','%','%'], :middle => ['%','%','%'], :bottom => ['%','%','%'] }
   end
@@ -43,6 +43,58 @@ class Board
       else
         self.update_cell(choice, mark)
       end
+  end
+  #Checks for draw
+  def check_draw
+    self.board.each do |row, value|
+      if value.any? {|char| char == '%'}
+        return false
+      else
+        next
+      end
+    end
+    return true
+  end
+  #Checks rows for matching markers
+  def check_win_rows
+    self.board.each do |row, value|
+      if value[0] == value[1] && value[0] == value[2]
+        return value[0]#returns winning marker
+      else
+        next
+      end
+    end
+    return false#no row win
+  end
+  #Checks columns for matching markers
+  def check_win_columns
+    left = []
+    middle = []
+    right = []
+    columns = [left, middle, right]
+    self.board.each do |row, value|
+      left << value[0]
+      middle << value[1]
+      right << value[2]
+    end
+    columns.each do |column|
+      if column.all? {|char| char == column.first}
+        return column.first
+      end
+    end
+    return false#No column win
+  end
+  #Checks diagonal for matching markers
+  def check_diagonal
+    top = self.board[:top][0][0]
+    middle = self.board[:middle][0][0]
+    bottom = self.board[:bottom][0][0]
+    diagonal = [top, middle, bottom]
+    if diagonal.all? {|char| char == diagonal.first}
+      return diagonal.first
+    else 
+      return false#No diagonal win
+    end
   end
 
 end

@@ -30,4 +30,5 @@ while game_over == false
   game_board.print_gameplay(player_one.name, player_one.score, player_two.name, player_two.score)
   game_board.check_cell(player_two.make_choice, player_two.marker)
   game_board.print_gameplay(player_one.name, player_one.score, player_two.name, player_two.score)
+  binding.pry
 end
