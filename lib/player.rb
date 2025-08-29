@@ -19,6 +19,7 @@ class Players
   end
 
   def make_choice
+    print "#{self.name}, please choose a cell: "
     loop do
      choice = gets.chomp.to_i
      if @@choices.any? {|num| num == choice}
