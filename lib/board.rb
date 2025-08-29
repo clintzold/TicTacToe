@@ -10,13 +10,17 @@ class Board
   def initialize
     @board = {  :top => ['%','%','%'], :middle => ['%','%','%'], :bottom => ['%','%','%'] }
   end
+  #Loads an example board with numbers to display cell choices
+  def example
+    self.board = { :top => ['1','2','3'], :middle => ['4','5','6'], :bottom => ['7','8','9']}
+  end
 #Prints up-to-date playing board to terminal
   def print
-    puts "\n| BOARD |"
+    puts "\n          | BOARD |"
     self.board.each do |key, value|
-      puts "| #{value[0]} #{value[1]} #{value[2]} |\n"
+      puts "          | #{value[0]} #{value[1]} #{value[2]} |\n"
     end
-    puts "\u203E\u203E\u203E\u203E\u203E\u203E\u203E\u203E\u203E\n"
+    puts "          \u203E\u203E\u203E\u203E\u203E\u203E\u203E\u203E\u203E\n"
   end
  #Changes cell to players marker if check_cell passes 
   def update_cell(choice, mark)
@@ -30,9 +34,8 @@ class Board
     column = @@choices[choice][1]
     if self.board[row][column] != '%'
       puts "#{choice.to_s} is already marked! Choose another!}"
-      return false
     else
-      return true
+      self.update_cell(choice, mark)
     end
   end
 
