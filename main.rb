@@ -35,7 +35,7 @@ while game_over == false do
     break if game_board.check_win != false  
     game_board.check_cell(player_two.make_choice, player_two.marker)
   end
-
+  #Finds the winner and update scores
   result = game_board.check_win
   if result == 'X'
     player_one.score += 1
@@ -48,7 +48,7 @@ while game_over == false do
   else
     puts "It's a draw!"
   end
-
+  #Prompts for another round. Board resets but scores are carried through next iteration
   puts "\nWould you like to play again? (Y) or (N): "
   loop do
     play_again = gets.chomp.capitalize
@@ -63,6 +63,5 @@ while game_over == false do
     end
   end
 end
-binding.pry
-puts "Goodbye!"
+puts "\n\nGoodbye!"
 

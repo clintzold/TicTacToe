@@ -17,7 +17,7 @@ class Players
   def greeting
     puts "\nGreetings, #{self.name}!"
   end
-
+  #Ensures proper cell selection
   def make_choice
     print "#{self.name}, please choose a cell: "
     loop do
@@ -29,7 +29,7 @@ class Players
      end
     end
   end
-
+  #Announces winner
   def wins
     puts "#{self.name} wins!!!!!"
   end
