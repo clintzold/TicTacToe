@@ -30,4 +30,9 @@ class Players
     end
   end
 
+  def wins
+    puts "#{self.name} wins!!!!!"
+  end
+
+
 end

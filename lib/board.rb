@@ -58,7 +58,8 @@ class Board
   #Checks rows for matching markers
   def check_win_rows
     self.board.each do |row, value|
-      if value[0] == value[1] && value[0] == value[2]
+      characters = [value[0], value[1], value[2]]
+      if characters.all? {|char| char == characters.first && char != '%'}
         return value[0]#returns winning marker
       else
         next
@@ -78,7 +79,7 @@ class Board
       right << value[2]
     end
     columns.each do |column|
-      if column.all? {|char| char == column.first}
+      if column.all? {|char| char == column.first && char != '%'}
         return column.first
       end
     end
@@ -91,14 +92,31 @@ class Board
     bottom = [self.board[:bottom][0], self.board[:bottom][2]]
     diagonal_one = [top[0], middle, bottom[1]]
     diagonal_two = [top[1], middle, bottom[0]]
-    p diagonal_one
-    if diagonal_one.all? {|char| char == diagonal_one.first}
+    if diagonal_one.all? {|char| char == diagonal_one.first && char != '%'}
       return diagonal_one.first
-    elsif diagonal_two.all? {|char| char == diagonal_two.first} 
+    elsif diagonal_two.all? {|char| char == diagonal_two.first && char != '%'} 
       return diagonal_two.first
     else
       return false#No diagonal win
     end
   end
 
+  #Runs all win or draw checking methods and returns their results
+  def check_win
+    if self.check_diagonal
+      return self.check_diagonal
+    elsif self.check_win_rows
+      return self.check_win_rows
+    elsif self.check_win_columns
+      return self.check_win_columns
+    else
+      return self.check_draw
+    end
+  end
+  #Reset the board
+  def reset
+    self.board.each do |key, value|
+      value.each_with_index {|char, index| value[index] = '%'}
+    end
+  end
 end
